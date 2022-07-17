@@ -3,6 +3,7 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Http\Controllers\AlumnoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,8 +25,27 @@ Route::get('/', function () {
     ]);
 });
 
+
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('/tutor', function () {
+    return Inertia::render('Tutor');
+})->middleware(['auth', 'verified'])->name('tutor');
+
+Route::get('/alumno', function () {
+    return Inertia::render('Alumno');
+})->middleware(['auth', 'verified'])->name('alumno');
+
+Route::post('/alumno/subir-actividad', [AlumnoController::class, 'store'])->middleware(['auth'])->name('alumno.subir-actividad');
+
+Route::get('/jurado', function () {
+    return Inertia::render('Jurado');
+})->middleware(['auth', 'verified'])->name('jurado');
+
+Route::get('/director', function () {
+    return Inertia::render('Director');
+})->middleware(['auth', 'verified'])->name('director');
 
 require __DIR__.'/auth.php';
